@@ -1,0 +1,19 @@
+{
+    "name": "adventofcode2022",
+    "version": "0.1.0",
+    "description": "Coding for xmas 2022",
+    "repository": {
+        "url": "https://github.com/k-jefferson/adventofcode2022"
+    },
+    "type": "module",
+    "license": "UNLICENSED",
+    "devDependencies": {
+        "@types/mocha": "^10.0.1",
+        "@types/node": "^18.11.10",
+        "mocha": "^10.1.0",
+        "typescript": "^4.9.3"
+    },
+    "scripts": {
+        "test": "npx mocha dist/tests/test.js" 
+    }
+}
