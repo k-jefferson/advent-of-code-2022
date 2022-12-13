@@ -2,6 +2,7 @@ import assert from "assert";
 
 import * as day1 from "../src/day1.js";
 import * as day2 from "../src/day2.js";
+import * as day3 from "../src/day3.js";
 
 describe("day 1", () => {
     it("should calculate the max calories carried by an elf", () => {
@@ -26,5 +27,21 @@ describe("day 2", () => {
     it("should compute the problem answer", () => {
         assert.strictEqual(day2.part1(), 9759);
         assert.strictEqual(day2.part2(), 12429);
+    });
+});
+
+const sacks = day3.parseInput();
+describe("day 3", () => {
+    it("should parse the inputs", () => {
+        assert.strictEqual(sacks[0][0], "RCMRQjLLWGTj");
+        assert.strictEqual(sacks[0][1], "nlnZwwnZJRZH");
+    });
+
+    it("should get the item being present in both compartments of the bag", () => {
+        assert.strictEqual(day3.getItemInBothCompartments(sacks[0]), "R");
+        assert.strictEqual(day3.getItemInBothCompartments(sacks[1]), "h");
+    });
+    it("should compute the problem answer", () => {
+        assert.strictEqual(day3.part1(), 7746);
     });
 });

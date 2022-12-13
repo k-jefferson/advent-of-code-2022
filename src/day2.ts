@@ -1,3 +1,5 @@
+import { getArraySum } from "./common.js"
+
 export const part1 = (): number =>
     getArraySum(
         parseInputsRound1().map(getRoundScore)
@@ -101,10 +103,6 @@ const getPlayerChoice = (round: IRoundResultPart2): PlayerChoice => {
     }
     // Scissors
     return PlayerChoice.Paper;
-};
-
-const getArraySum = (array: Array<number>): number => {
-    return array.reduce((accumulator, value) => accumulator + value, 0);
 };
 
 export interface IRound {
