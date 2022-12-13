@@ -1,9 +1,23 @@
 export const part1 = (): number =>
-    parseInputs()
-        .map(getRoundScore)
-        .reduce((accumulator, value) => accumulator + value, 0);
+    getArraySum(
+        parseInputsRound1().map(getRoundScore)
+    );
 
-const parseInputs = (): Array<IRound> => {
+export const part2 = () => {
+    return getArraySum(
+        parseInputsRound2()
+        .map(round => {
+            const plays: IRound = {
+                opponent: round.opponent,
+                player: getPlayerChoice(round)
+            };
+            return plays;
+        })
+        .map(getRoundScore)
+    );
+};
+
+const parseInputsRound1 = (): Array<IRound> => {
     return input.split("\n").map(round => {
         const plays = round.split(" ");
         return {
@@ -46,6 +60,53 @@ export const getRoundScore = (round: IRound): number => {
     return 6;
 };
 
+const parseInputsRound2 = (): Array<IRoundResultPart2> => {
+    return input.split("\n").map(round => {
+        const plays = round.split(" ");
+        return {
+            result: <RoundResult><keyof typeof RoundResult>plays[1],
+            opponent: <OpponentChoice><keyof typeof PlayerChoice>plays[0]
+        }
+    });
+};
+
+const getPlayerChoice = (round: IRoundResultPart2): PlayerChoice => {
+    if (round.result === RoundResult.Win) {
+        if (round.opponent === OpponentChoice.Paper) {
+            return PlayerChoice.Scissors;
+        }
+        if (round.opponent === OpponentChoice.Rock) {
+            return PlayerChoice.Paper;
+        }
+        // Scissors
+        return PlayerChoice.Rock;
+    }
+    if (round.result === RoundResult.Draw) {
+        if (round.opponent === OpponentChoice.Paper) {
+            return PlayerChoice.Paper;
+        }
+        if (round.opponent === OpponentChoice.Rock) {
+            return PlayerChoice.Rock;
+        }
+        // Scissors
+        return PlayerChoice.Scissors;
+    }
+
+    // Loose
+    if (round.opponent === OpponentChoice.Paper) {
+        return PlayerChoice.Rock;
+    }
+    if (round.opponent === OpponentChoice.Rock) {
+        return PlayerChoice.Scissors;
+    }
+    // Scissors
+    return PlayerChoice.Paper;
+};
+
+const getArraySum = (array: Array<number>): number => {
+    return array.reduce((accumulator, value) => accumulator + value, 0);
+};
+
 export interface IRound {
     player: PlayerChoice;
     opponent: OpponentChoice;
@@ -61,6 +122,17 @@ export enum OpponentChoice {
     Rock = "A",
     Paper = "B",
     Scissors = "C"
+}
+
+export enum RoundResult {
+    Loose = "X",
+    Draw = "Y",
+    Win = "Z"
+}
+
+export interface IRoundResultPart2 {
+    opponent: OpponentChoice;
+    result: RoundResult;
 }
 
 const input = `C Y

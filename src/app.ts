@@ -10,3 +10,5 @@ console.log(day1.part2());
 console.log("=> day 2");
 console.log("part 1");
 console.log(day2.part1());
+console.log("part 2");
+console.log(day2.part2());

@@ -25,5 +25,6 @@ describe("day 2", () => {
     });
     it("should compute the problem answer", () => {
         assert.strictEqual(day2.part1(), 9759);
+        assert.strictEqual(day2.part2(), 12429);
     });
 });
